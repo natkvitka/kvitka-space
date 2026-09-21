@@ -16,7 +16,8 @@ Node потрібен лише для команди збірки під Vercel.
 | `index.html` | розмітка, усі екрани, `<head>` із SEO |
 | `styles.css` | стилі |
 | `app.js` | **весь контент** (формати, ціни, болі, відгуки, список сертифікатів) + навігація |
-| `public/kvitka/` | фото форматів, `hero.jpg`, `certs/` — 19 сертифікатів |
+| `public/kvitka/` | фото форматів, `hero.jpg`, `og.jpg` (прев'ю для шерінгу 1200×630), `certs/` — 19 сертифікатів |
+| `robots.txt`, `sitemap.xml` | SEO для пошуковиків (потрібен домен) |
 | `build.mjs` | збирає `.vercel/output` для Vercel |
 
 ---
@@ -78,10 +79,12 @@ JS). Якщо хостинг вимагає fallback на 404 — вкажи `in
 
 ## ⚠️ Що зробити після деплою
 
-1. **Домен у SEO-тегах.** У `index.html` (`<head>`) стоїть заглушка
-   `YOUR-DOMAIN.com` у 5+ місцях (canonical, og:url, og:image, twitter:image,
-   JSON-LD). Заміни на реальний домен — один пошук-заміна по файлу.
-   Поки не заміниш — просто не працюватиме прев'ю при шерінгу, на сам сайт не впливає.
+1. **Домен у SEO-тегах.** Заглушка `YOUR-DOMAIN.com` стоїть у `index.html`
+   (canonical, og:url, og:image, twitter:image, JSON-LD), у `robots.txt` і
+   `sitemap.xml`. Заміни на реальний домен одною командою з теки сайту:
+   `sed -i '' 's/YOUR-DOMAIN.com/твійдомен.com/g' index.html robots.txt sitemap.xml`
+   (на Linux — `sed -i` без `''`). До заміни прев'ю при шерінгу не працюватиме,
+   а пошуковики отримуватимуть хибний canonical — тому не запускай рекламу до заміни.
 2. **Індексація Google.** Якщо хостинг має «захист паролем / preview protection» —
    вимкни його для production, інакше пошуковики не побачать сайт.
 3. **Instagram / Telegram.** Перевір, що `kvitka__nata` і `Kvitka7778` — актуальні

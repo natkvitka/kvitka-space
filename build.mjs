@@ -12,6 +12,8 @@ await mkdir(".vercel/output/static/public", { recursive: true });
 await cp("index.html", ".vercel/output/static/index.html");
 await cp("styles.css", ".vercel/output/static/styles.css");
 await cp("app.js", ".vercel/output/static/app.js");
+await cp("robots.txt", ".vercel/output/static/robots.txt");
+await cp("sitemap.xml", ".vercel/output/static/sitemap.xml");
 await cp("public/kvitka", ".vercel/output/static/public/kvitka", { recursive: true });
 
 await writeFile(
