@@ -79,12 +79,11 @@ JS). Якщо хостинг вимагає fallback на 404 — вкажи `in
 
 ## ⚠️ Що зробити після деплою
 
-1. **Домен у SEO-тегах.** Заглушка `YOUR-DOMAIN.com` стоїть у `index.html`
-   (canonical, og:url, og:image, twitter:image, JSON-LD), у `robots.txt` і
-   `sitemap.xml`. Заміни на реальний домен одною командою з теки сайту:
-   `sed -i '' 's/YOUR-DOMAIN.com/твійдомен.com/g' index.html robots.txt sitemap.xml`
-   (на Linux — `sed -i` без `''`). До заміни прев'ю при шерінгу не працюватиме,
-   а пошуковики отримуватимуть хибний canonical — тому не запускай рекламу до заміни.
+1. **Домен у SEO-тегах.** Готово: `nataliakvitka.com` підставлений в
+   `index.html` (canonical, og:url, og:image, twitter:image, JSON-LD), у
+   `robots.txt` і `sitemap.xml`. Якщо домен колись зміниться — одна команда
+   з теки сайту: `sed -i '' 's/старийдомен.com/новийдомен.com/g' index.html robots.txt sitemap.xml`
+   (на Linux — `sed -i` без `''`).
 2. **Індексація Google.** Якщо хостинг має «захист паролем / preview protection» —
    вимкни його для production, інакше пошуковики не побачать сайт.
 3. **Instagram / Telegram.** Перевір, що `kvitka__nata` і `Kvitka7778` — актуальні
