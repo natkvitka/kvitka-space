@@ -2328,6 +2328,17 @@ button:active,
   background: rgba(255, 253, 250, 0.72) !important;
 }
 
+.change-intro {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.58;
+}
+
+.change-intro:last-of-type {
+  margin-bottom: 20px;
+}
+
 .change-list article {
   padding: 16px 17px 18px !important;
   border-radius: 22px !important;
