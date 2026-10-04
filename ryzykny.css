@@ -1,0 +1,373 @@
+/* ============================================================
+   «Ризикни бути живою» — стилі, специфічні для цієї сторінки.
+   Базові токени й компоненти (кольори, кнопки, картки) — у styles.css.
+   ============================================================ */
+
+/* ---- ефект "стосу карток" — рахується в JS через transform, не через CSS sticky
+   (нативний sticky в браузері ламається, коли забагато елементів ділять один контейнер) ---- */
+.ryz-stack {
+  position: relative;
+}
+
+.ryz-stack article {
+  position: relative;
+  margin: 0 0 20px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 253, 250, 0.98);
+  box-shadow: 0 12px 30px rgba(64, 49, 38, 0.08);
+  color: var(--ink);
+  line-height: 1.4;
+  will-change: transform;
+}
+
+.ryz-stack article::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 3px;
+  margin-bottom: 12px;
+  border-radius: 999px;
+  background: rgba(169, 138, 114, 0.4);
+}
+
+.ryz-stack article:last-child {
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ryz-stack article {
+    transform: none !important;
+  }
+}
+
+.hero .actions {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.wide.secondary {
+  display: block;
+  color: var(--sage-deep);
+  background: var(--white);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  box-shadow: none;
+}
+
+/* на головному сайті заголовки підкреслюються при скролі — тут ця риска виглядає зайвою, прибираємо */
+.heading.reveal h2::after {
+  content: none;
+}
+
+/* невелика іскорка на ключовому заголовку "Впізнати себе" — та сама родзинка, що на головному сайті */
+.app .panel:nth-of-type(1) .heading span::after {
+  content: "✦";
+  display: inline-block;
+  margin-left: 6px;
+  color: var(--glow);
+  animation: sparkleTwinkle 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app .panel:nth-of-type(1) .heading span::after {
+    animation: none;
+  }
+}
+
+/* ---- компактні чипси (у групі досліджуємо) ---- */
+.ryz-chips {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.ryz-chips span {
+  display: block;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+  color: var(--ink);
+  font-size: 13.5px;
+  line-height: 1.35;
+}
+
+@media (max-width: 360px) {
+  .ryz-chips {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- сітка фактів з іконками (як проходить група) ---- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.stat-grid article {
+  padding: 16px 14px;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+  text-align: left;
+}
+
+.stat-grid .stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background: var(--sage-tint);
+  font-size: 16px;
+}
+
+.stat-grid strong {
+  display: block;
+  margin-bottom: 2px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.stat-grid span {
+  display: block;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+/* ---- ONLINE / OFFLINE картки ціни ---- */
+.price-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.price-grid article {
+  padding: 16px 14px;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+}
+
+.price-grid .price-mode {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--sage-tint);
+  color: var(--sage-deep);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.price-grid strong {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  color: var(--ink);
+}
+
+.price-grid span.price-date {
+  display: block;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+@media (max-width: 360px) {
+  .price-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.insurance-note {
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(205, 167, 155, 0.14);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ryz-marquee {
+  width: 100% !important;
+  margin-top: 8px;
+}
+
+/* ---- квіз: повноекранний шар поверх сторінки ---- */
+.quiz-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(56, 46, 42, 0.42);
+  backdrop-filter: blur(2px);
+}
+
+.quiz-overlay[hidden] {
+  display: none;
+}
+
+.quiz-card {
+  width: min(460px, 100%);
+  max-height: 94vh;
+  overflow-y: auto;
+  background: var(--cream);
+  border-radius: 22px 22px 0 0;
+  padding: 18px 18px calc(24px + env(safe-area-inset-bottom, 0px));
+  box-shadow: var(--shadow-elevated);
+}
+
+@media (min-width: 520px) {
+  .quiz-overlay {
+    align-items: center;
+  }
+  .quiz-card {
+    max-height: 88vh;
+    border-radius: 22px;
+  }
+}
+
+.quiz-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.quiz-progress {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--line);
+  overflow: hidden;
+}
+
+.quiz-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--sage);
+  border-radius: var(--radius-pill);
+  transition: width 320ms var(--ease);
+}
+
+.quiz-close {
+  min-width: 32px;
+  min-height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: var(--shadow-card);
+}
+
+.quiz-step-label {
+  margin-bottom: 6px;
+  color: var(--sage-deep);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.quiz-back {
+  margin-bottom: 10px;
+  border: 0;
+  padding: 0;
+  color: var(--sage-deep);
+  background: transparent;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.quiz-body h2 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.quiz-body p {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.quiz-hook {
+  margin-bottom: 10px;
+  font-size: 34px;
+  letter-spacing: 0.04em;
+}
+
+.quiz-icon-inline {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.quiz-options button {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  color: var(--ink);
+  background: var(--white);
+  text-align: left;
+  line-height: 1.35;
+  box-shadow: var(--shadow-card);
+  animation: cardRise 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.quiz-options button.active {
+  color: var(--white);
+  border-color: var(--sage);
+  background: var(--sage);
+  box-shadow: var(--shadow-glow);
+  transform: scale(1.015);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-options button {
+    animation: none;
+  }
+}
+
+.quiz-final-meta {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.quiz-final-meta strong {
+  color: var(--sage-deep);
+}
