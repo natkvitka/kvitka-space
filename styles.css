@@ -3224,7 +3224,8 @@ body {
 }
 
 .ryzykny-popup-body {
-  padding: 22px 20px 20px;
+  padding: 22px 20px 24px;
+  text-align: center;
 }
 
 .ryzykny-popup-eyebrow {
@@ -3244,24 +3245,16 @@ body {
   font-size: 20px;
   line-height: 1.4;
   color: var(--ink);
+  text-align: center;
 }
 
 .ryzykny-popup-body p {
-  margin: 0 0 22px;
+  margin: 0 auto 22px;
+  max-width: 280px;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.65;
-}
-
-.ryzykny-popup-dismiss {
-  display: block;
-  width: 100%;
-  margin-top: 8px;
-  padding: 10px;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  font-size: 13px;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -483,7 +483,6 @@ document.addEventListener("keydown", (event) => {
   }
 
   document.querySelector("#ryzykny-popup-close")?.addEventListener("click", dismiss);
-  document.querySelector("#ryzykny-popup-dismiss")?.addEventListener("click", dismiss);
   overlay.addEventListener("click", (event) => {
     if (event.target === overlay) dismiss();
   });
