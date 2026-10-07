@@ -448,3 +448,38 @@ observeReveal();
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeLightbox();
 });
+
+/* =====================================================================
+   Попап «Ризикни бути живою» на головній — показуємо один раз через
+   10с після завантаження (якщо користувач ще на Головній і сьогодні
+   попап ще не закривав). 10с, а не 5 — дає людині встигнути побачити
+   шапку сайту, перш ніж щось спливає зверху.
+   ===================================================================== */
+(function setupRyzyknyPopup() {
+  const overlay = document.querySelector("#ryzykny-popup");
+  if (!overlay) return;
+
+  const STORAGE_KEY = "ryzykny-popup-dismissed";
+  const today = new Date().toISOString().slice(0, 10);
+
+  function dismiss() {
+    overlay.hidden = true;
+    try { localStorage.setItem(STORAGE_KEY, today); } catch (e) {}
+  }
+
+  let alreadyDismissedToday = false;
+  try { alreadyDismissedToday = localStorage.getItem(STORAGE_KEY) === today; } catch (e) {}
+  if (alreadyDismissedToday) return;
+
+  setTimeout(() => {
+    if (document.querySelector("#home")?.classList.contains("active")) {
+      overlay.hidden = false;
+    }
+  }, 10000);
+
+  document.querySelector("#ryzykny-popup-close")?.addEventListener("click", dismiss);
+  document.querySelector("#ryzykny-popup-dismiss")?.addEventListener("click", dismiss);
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) dismiss();
+  });
+})();

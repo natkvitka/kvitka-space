@@ -51,7 +51,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=1" />
+    <link rel="stylesheet" href="./styles.css?v=2" />
     <link rel="preload" as="image" href="./public/kvitka/hero.jpg?v=3" fetchpriority="high" />
   </head>
   <body>
@@ -181,6 +181,19 @@
 
       <section class="screen" id="formats">
         <article class="panel">
+          <div class="heading reveal"><span>✣ Відкритий набір</span><h2>Ризикни бути живою</h2></div>
+          <a class="ryzykny-promo" href="./ryzykny-buty-zhyvoyu.html">
+            <img src="./public/kvitka/ryzykny-hero.jpg?v=1" alt="" loading="lazy" decoding="async" />
+            <span class="ryzykny-promo-badge">Відкритий набір</span>
+            <div class="ryzykny-promo-text">
+              <strong>Терапевтична група «Ризикни бути живою»</strong>
+              <span>17 зустрічей · ONLINE від 16.10 · Прага від 23.10</span>
+            </div>
+            <span class="ryzykny-promo-cta">Дізнатись більше →</span>
+          </a>
+        </article>
+
+        <article class="panel">
           <div class="heading reveal"><span>✣ Формати</span><h2>Оберіть формат, який відгукується</h2></div>
           <div class="services" id="service-list"></div>
           <button class="wide" data-screen="insurance">Страхова компенсація</button>
@@ -270,6 +283,21 @@
         <button data-screen="formats"><span>◇</span>Формати</button>
       </nav>
     </main>
-    <script src="./app.js?v=1"></script>
+
+    <div class="ryzykny-popup-overlay" id="ryzykny-popup" hidden>
+      <div class="ryzykny-popup-card">
+        <button type="button" class="ryzykny-popup-close" id="ryzykny-popup-close" aria-label="Закрити">×</button>
+        <img src="./public/kvitka/ryzykny-hero.jpg?v=1" alt="" loading="lazy" decoding="async" />
+        <div class="ryzykny-popup-body">
+          <span class="ryzykny-popup-eyebrow">Відкритий набір · ONLINE від 16.10</span>
+          <strong>Зовні все добре. А всередині — порожньо?</strong>
+          <p>Терапевтична група «Ризикни бути живою» — простір, де можна поступово повернутися до себе.</p>
+          <a class="wide" href="./ryzykny-buty-zhyvoyu.html">Дізнатись більше</a>
+          <button type="button" class="ryzykny-popup-dismiss" id="ryzykny-popup-dismiss">Не зараз</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js?v=2"></script>
   </body>
 </html>
