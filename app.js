@@ -464,20 +464,20 @@ document.addEventListener("keydown", (event) => {
   const overlay = document.querySelector("#ryzykny-popup");
   if (!overlay) return;
 
-  const STORAGE_KEY = "ryzykny-popup-dismissed";
+  const STORAGE_KEY = "ryzykny-popup-shown";
   const today = new Date().toISOString().slice(0, 10);
 
   function dismiss() {
     overlay.hidden = true;
-    try { localStorage.setItem(STORAGE_KEY, today); } catch (e) {}
   }
 
-  let alreadyDismissedToday = false;
-  try { alreadyDismissedToday = localStorage.getItem(STORAGE_KEY) === today; } catch (e) {}
-  if (!alreadyDismissedToday) {
+  let alreadyShownToday = false;
+  try { alreadyShownToday = localStorage.getItem(STORAGE_KEY) === today; } catch (e) {}
+  if (!alreadyShownToday) {
     setTimeout(() => {
       if (document.querySelector("#home")?.classList.contains("active")) {
         overlay.hidden = false;
+        try { localStorage.setItem(STORAGE_KEY, today); } catch (e) {}
       }
     }, 5000);
   }
