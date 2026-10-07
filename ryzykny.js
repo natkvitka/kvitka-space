@@ -357,3 +357,9 @@ function setupStack(containerId, topBase, topStep) {
   update();
 }
 setupStack("ryz-pains", 90, 10);
+
+// для реклами напряму на квіз: посилання виду ryzykny-buty-zhyvoyu.html?quiz=1
+// одразу відкриває тест при заході на сторінку
+if (new URLSearchParams(window.location.search).get("quiz") === "1") {
+  openQuiz();
+}
