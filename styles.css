@@ -3143,11 +3143,20 @@ body {
   color: var(--white);
 }
 
+.ryzykny-promo-text small {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
 .ryzykny-promo-text strong {
   display: block;
   margin-bottom: 8px;
   font-family: var(--font-display);
   font-size: 19px;
+  font-weight: 600;
   line-height: 1.3;
 }
 
