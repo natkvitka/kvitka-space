@@ -462,8 +462,7 @@ document.addEventListener("keydown", (event) => {
    ===================================================================== */
 (function setupRyzyknyPopup() {
   const overlay = document.querySelector("#ryzykny-popup");
-  const target = document.querySelector(".home-shortcuts");
-  if (!overlay || !target) return;
+  if (!overlay) return;
 
   const STORAGE_KEY = "ryzykny-popup-dismissed";
   const today = new Date().toISOString().slice(0, 10);
@@ -475,29 +474,12 @@ document.addEventListener("keydown", (event) => {
 
   let alreadyDismissedToday = false;
   try { alreadyDismissedToday = localStorage.getItem(STORAGE_KEY) === today; } catch (e) {}
-
   if (!alreadyDismissedToday) {
-    if ("IntersectionObserver" in window) {
-      let delayTimer = null;
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !delayTimer) {
-            delayTimer = setTimeout(() => {
-              if (document.querySelector("#home")?.classList.contains("active")) {
-                overlay.hidden = false;
-              }
-              io.unobserve(target);
-            }, 1500);
-          } else if (!entry.isIntersecting && delayTimer) {
-            clearTimeout(delayTimer);
-            delayTimer = null;
-          }
-        });
-      }, { threshold: 0.4 });
-      io.observe(target);
-    } else {
-      overlay.hidden = false;
-    }
+    setTimeout(() => {
+      if (document.querySelector("#home")?.classList.contains("active")) {
+        overlay.hidden = false;
+      }
+    }, 5000);
   }
 
   document.querySelector("#ryzykny-popup-close")?.addEventListener("click", dismiss);
