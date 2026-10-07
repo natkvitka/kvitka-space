@@ -455,14 +455,15 @@ document.addEventListener("keydown", (event) => {
 });
 
 /* =====================================================================
-   Попап «Ризикни бути живою» на головній — показуємо один раз через
-   10с після завантаження (якщо користувач ще на Головній і сьогодні
-   попап ще не закривав). 10с, а не 5 — дає людині встигнути побачити
-   шапку сайту, перш ніж щось спливає зверху.
+   Попап «Ризикни бути живою» на головній — показуємо один раз, коли
+   людина доскролила до блоку «Оберіть, з чого почати» (видно, що вона
+   саме зараз цікавиться форматами), з невеликою паузою 1.5с, щоб не
+   вискакував різко під час самого скролу. Показуємо раз на день.
    ===================================================================== */
 (function setupRyzyknyPopup() {
   const overlay = document.querySelector("#ryzykny-popup");
-  if (!overlay) return;
+  const target = document.querySelector(".home-shortcuts");
+  if (!overlay || !target) return;
 
   const STORAGE_KEY = "ryzykny-popup-dismissed";
   const today = new Date().toISOString().slice(0, 10);
@@ -474,13 +475,30 @@ document.addEventListener("keydown", (event) => {
 
   let alreadyDismissedToday = false;
   try { alreadyDismissedToday = localStorage.getItem(STORAGE_KEY) === today; } catch (e) {}
-  if (alreadyDismissedToday) return;
 
-  setTimeout(() => {
-    if (document.querySelector("#home")?.classList.contains("active")) {
+  if (!alreadyDismissedToday) {
+    if ("IntersectionObserver" in window) {
+      let delayTimer = null;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !delayTimer) {
+            delayTimer = setTimeout(() => {
+              if (document.querySelector("#home")?.classList.contains("active")) {
+                overlay.hidden = false;
+              }
+              io.unobserve(target);
+            }, 1500);
+          } else if (!entry.isIntersecting && delayTimer) {
+            clearTimeout(delayTimer);
+            delayTimer = null;
+          }
+        });
+      }, { threshold: 0.4 });
+      io.observe(target);
+    } else {
       overlay.hidden = false;
     }
-  }, 10000);
+  }
 
   document.querySelector("#ryzykny-popup-close")?.addEventListener("click", dismiss);
   document.querySelector("#ryzykny-popup-dismiss")?.addEventListener("click", dismiss);
