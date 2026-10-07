@@ -7,12 +7,12 @@ const GROUP = {
   onlineDate: "16.10",
   offlineDate: "23.10",
   priceOnline: "700 Kč",
-  priceOffline: "800 Kč",
+  priceOffline: "700 Kč",
   meetings: 17,
   sessionLength: "2,5 години", // ⚠️ в матеріалах зустрічалось і "3 години" — уточнити в Наталі, тоді поміняти тут
   everyWeeks: "раз на 2 тижні, по п'ятницях",
   openFor: "перші 3 зустрічі",
-  insurance: "До 5000 Kč компенсації цього року, можна повторно на початку 2027 — тобто загалом до 10 000 Kč (залежно від умов вашої страхової)."
+  insurance: "Страхова компенсує 80% вартості групової терапії. За деталями — пишіть мені в особисті."
 };
 
 const accordionTopics = [
@@ -236,7 +236,7 @@ function buildMessage() {
   return (
     "Доброго дня! Пройшла тест про групу «Ризикни бути живою» на сайті.\n\n" +
     lines.join("\n") +
-    "\n\nХочу дізнатися більше про участь у групі."
+    "\n\nХочу записатися на безкоштовну консультацію-знайомство (15 хв) щодо участі в групі."
   );
 }
 
@@ -304,7 +304,8 @@ function render() {
       <div>ONLINE — від ${GROUP.onlineDate} · ${GROUP.priceOnline}/зустріч</div>
       <div>OFFLINE, Прага — від ${GROUP.offlineDate} · ${GROUP.priceOffline}/зустріч</div>
     </div>
-    <button type="button" class="wide" id="quiz-submit">Хочу дізнатися про групу</button>
+    <p>Перед групою — безкоштовна 15-хвилинна консультація-знайомство: познайомимось, і я підкажу, чи підходить тобі саме цей формат.</p>
+    <button type="button" class="wide" id="quiz-submit">Записатися на безкоштовну консультацію</button>
   `;
   document.querySelector("#quiz-submit").addEventListener("click", () => {
     window.open(`${GROUP.telegramUrl}?text=${encodeURIComponent(buildMessage())}`, "_blank");
