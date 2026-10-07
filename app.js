@@ -342,6 +342,11 @@ function renderService(id) {
     <span class="service-meta">${item.meta} · ${item.duration.replace("перша зустріч", "<br />перша зустріч")}</span>
     <h2>${item.title}</h2>
     <p>${item.intro}</p>
+    ${item.id === "group" ? `
+    <a class="service-group-note" href="./ryzykny-buty-zhyvoyu.html">
+      <span>🌿 Зараз триває набір: «Ризикни бути живою»</span>
+      <b>Дізнатись більше →</b>
+    </a>` : ""}
     <div class="payment-note">
       <span>Як записатися</span>
       <p>${bookingNote}</p>
