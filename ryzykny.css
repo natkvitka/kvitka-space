@@ -42,6 +42,28 @@
   }
 }
 
+/* ---- фото кімнати групи — звичайне зображення з підписом ---- */
+.ryz-room-photo {
+  margin: 18px 0 0;
+}
+
+.ryz-room-photo img {
+  display: block;
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  object-position: center 40%;
+  border-radius: var(--radius-md);
+}
+
+.ryz-room-photo figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+}
+
 .hero .actions {
   grid-template-columns: 1fr;
   gap: 10px;
