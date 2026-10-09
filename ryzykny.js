@@ -53,14 +53,14 @@ const accordionTopics = [
 ];
 
 const pains = [
-  "повернути контакт із собою та своїми відчуттями",
-  "краще чути свої «хочу» і «не хочу», потреби та бажання",
-  "знову відчути своє тіло та більше живості в ньому",
-  "повернути жагу до життя, енергію та цікавість",
-  "навчитися говорити: «Я не хочу», «Мені так не підходить», «Я хочу інакше»",
-  "відстоювати свої межі та залишатися на своєму боці",
-  "ризикувати бути собою навіть там, де страшно",
-  "знайомитися з новими жінками та отримувати досвід живого, підтримувального контакту"
+  { icon: "./public/kvitka/icon-hands-butterfly.png?v=3", text: "повернути контакт із собою та своїми відчуттями" },
+  { icon: "./public/kvitka/icon-lighthouse.png?v=3", text: "краще чути свої «хочу» і «не хочу», потреби та бажання" },
+  { icon: "./public/kvitka/icon-wings.png?v=3", text: "знову відчути своє тіло та більше живості в ньому" },
+  { icon: "./public/kvitka/icon-watering-can.png?v=3", text: "повернути жагу до життя, енергію та цікавість" },
+  { icon: "./public/kvitka/icon-birdcage.png?v=3", text: "навчитися говорити: «Я не хочу», «Мені так не підходить», «Я хочу інакше»" },
+  { icon: "./public/kvitka/icon-anchor.png?v=3", text: "відстоювати свої межі та залишатися на своєму боці" },
+  { icon: "./public/kvitka/icon-bridge.png?v=3", text: "ризикувати бути собою навіть там, де страшно" },
+  { icon: "./public/kvitka/icon-nest.png?v=3", text: "знайомитися з новими жінками та отримувати досвід живого, підтримувального контакту" }
 ];
 
 const explore = [
@@ -88,6 +88,12 @@ const format = [
 
 function renderList(id, items) {
   document.querySelector(id).innerHTML = items.map((text) => `<article>${text}</article>`).join("");
+}
+
+function renderPains(id, items) {
+  document.querySelector(id).innerHTML = items
+    .map((item) => `<article><img class="pain-icon" src="${item.icon}" alt="" loading="lazy" /><p>${item.text}</p></article>`)
+    .join("");
 }
 
 function renderChips(id, items) {
@@ -128,19 +134,26 @@ document.addEventListener("click", (event) => {
   }
 });
 
-renderList("#ryz-pains", pains);
+renderPains("#ryz-pains", pains);
 renderChips("#ryz-explore", explore);
 renderStats("#ryz-stats", groupStats);
 renderList("#ryz-format", format);
 renderAccordion("#ryz-accordion", accordionTopics);
 
 const priceModes = [
-  { mode: "ONLINE", price: GROUP.priceOnline, date: `старт ${GROUP.onlineDate}` },
-  { mode: "OFFLINE · Прага", price: GROUP.priceOffline, date: `старт ${GROUP.offlineDate}` }
+  { mode: "ONLINE", price: GROUP.priceOnline, date: `старт ${GROUP.onlineDate}`, message: `Доброго дня! Хочу записатися на групу «Ризикни бути живою» — формат ONLINE, ${GROUP.priceOnline}/зустріч, старт ${GROUP.onlineDate}.` },
+  { mode: "OFFLINE · Прага", price: GROUP.priceOffline, date: `старт ${GROUP.offlineDate}`, message: `Доброго дня! Хочу записатися на групу «Ризикни бути живою» — формат OFFLINE у Празі, ${GROUP.priceOffline}/зустріч, старт ${GROUP.offlineDate}.` }
 ];
 document.querySelector("#ryz-price").innerHTML = priceModes
-  .map((p) => `<article><span class="price-mode">${p.mode}</span><strong>${p.price}</strong><span class="price-date">за зустріч · ${p.date}</span></article>`)
+  .map((p, i) => `<article data-price-select="${i}" data-price-message="${encodeURIComponent(p.message)}"><span class="price-check">✓</span><span class="price-mode">${p.mode}</span><strong>${p.price}</strong><span class="price-date">за зустріч · ${p.date}</span></article>`)
   .join("");
+
+document.querySelector("#ryz-price").addEventListener("click", (event) => {
+  const card = event.target.closest("[data-price-select]");
+  if (!card) return;
+  document.querySelectorAll("#ryz-price [data-price-select]").forEach((el) => el.classList.toggle("selected", el === card));
+  window.open(`${GROUP.telegramUrl}?text=${card.dataset.priceMessage}`, "_blank");
+});
 
 document.querySelector("#ryz-insurance-text").textContent = GROUP.insurance;
 
@@ -168,12 +181,6 @@ observeReveal();
    ===================================================================== */
 const questions = [
   {
-    icon: "🌀",
-    label: "Автоматичне життя",
-    q: "Чи буває так, що ти ніби живеш на автоматі?",
-    options: ["Так, часто", "Іноді", "Майже ніколи"]
-  },
-  {
     icon: "🌫️",
     label: "Розуміння бажань",
     q: "Чи складно тобі зрозуміти, чого ти насправді хочеш?",
@@ -196,18 +203,6 @@ const questions = [
     label: "Почуття",
     q: "Що відбувається з твоїми почуттями?",
     options: ["Я їх часто стримую", "Не завжди розумію, що відчуваю", "Я дозволяю собі їх проживати"]
-  },
-  {
-    icon: "🪞",
-    label: "Підлаштування в стосунках",
-    q: "Чи є у твоєму житті стосунки, де ти більше підлаштовуєшся, ніж можеш бути собою?",
-    options: ["Так", "Іноді", "Ні"]
-  },
-  {
-    icon: "🔥",
-    label: "Дозволяти собі хотіти",
-    q: "Чи дозволяєш ти собі хотіти більшого — у стосунках, сексуальності, реалізації, житті?",
-    options: ["Мені складно навіть зрозуміти, чого я хочу", "Хочу, але боюся дозволити собі", "Так, я добре знаю свої бажання"]
   },
   {
     icon: "🤍",

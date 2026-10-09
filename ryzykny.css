@@ -49,8 +49,11 @@
 
 .ryz-stack article {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
   margin: 0 0 20px;
-  padding: 18px;
+  padding: 14px 18px;
   border: 1px solid var(--line);
   border-radius: 22px;
   background: rgba(255, 253, 250, 0.98);
@@ -60,14 +63,15 @@
   will-change: transform;
 }
 
-.ryz-stack article::before {
-  content: "";
-  display: block;
-  width: 24px;
-  height: 3px;
-  margin-bottom: 12px;
-  border-radius: 999px;
-  background: rgba(169, 138, 114, 0.4);
+.ryz-stack .pain-icon {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.ryz-stack article p {
+  margin: 0;
 }
 
 .ryz-stack article:last-child {
@@ -225,10 +229,45 @@
 }
 
 .price-grid article {
+  position: relative;
   padding: 16px 14px;
   border-radius: var(--radius-md);
   background: var(--white);
   box-shadow: var(--shadow-card);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out, background 180ms ease-out;
+}
+
+.price-grid article:active {
+  transform: scale(0.97);
+}
+
+.price-grid article.selected {
+  border-color: var(--sage-deep);
+  background: var(--sage-tint);
+  box-shadow: var(--shadow-elevated);
+  transform: scale(1.02);
+}
+
+.price-check {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--sage-deep);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-grid article.selected .price-check {
+  display: flex;
 }
 
 .price-grid .price-mode {
