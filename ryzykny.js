@@ -18,6 +18,7 @@ const GROUP = {
 const accordionTopics = [
   {
     title: "Ця група може бути про тебе, якщо ти...",
+    icon: "./public/kvitka/icon-wilting-woman.png?v=1",
     items: [
       "втомилася постійно бути сильною",
       "часто живеш через «треба», а не через «хочу»",
@@ -35,6 +36,7 @@ const accordionTopics = [
   },
   {
     title: "Що може змінитися",
+    icon: "./public/kvitka/icon-seed-pod.png?v=1",
     items: [
       "краще чути себе та свої потреби",
       "розуміти, що з тобою відбувається",
@@ -62,21 +64,21 @@ const pains = [
 ];
 
 const explore = [
-  "чого мені насправді хочеться",
-  "що допомагає і що заважає чути себе",
-  "свої почуття, потреби та бажання",
-  "страх змін і невизначеності",
-  "довіру до себе та інших",
-  "близькість і дистанцію у стосунках",
-  "страх відкидання та самотності",
-  "свої звичні способи захищатися й підтримувати себе"
+  { icon: "./public/kvitka/card-compass.png?v=1", text: "чого мені насправді хочеться" },
+  { icon: "./public/kvitka/card-scales.png?v=1", text: "що допомагає і що заважає чути себе" },
+  { icon: "./public/kvitka/card-heart-hand.png?v=1", text: "свої почуття, потреби та бажання" },
+  { icon: "./public/kvitka/card-cocoon.png?v=1", text: "страх змін і невизначеності" },
+  { icon: "./public/kvitka/card-hands.png?v=1", text: "довіру до себе та інших" },
+  { icon: "./public/kvitka/card-spheres.png?v=1", text: "близькість і дистанцію у стосунках" },
+  { icon: "./public/kvitka/card-dome.png?v=1", text: "страх відкидання та самотності" },
+  { icon: "./public/kvitka/card-shell.png?v=1", text: "свої звичні способи захищатися й підтримувати себе" }
 ];
 
 const groupStats = [
-  { icon: "🔒", title: "Закритий формат", caption: "постійний склад групи" },
-  { icon: "👥", title: "До 10 учасниць", caption: "камерний склад для довіри" },
-  { icon: "🗓️", title: "Раз на 2 тижні", caption: "по п'ятницях" },
-  { icon: "🚪", title: "Перші 3 зустрічі", caption: "ще можна приєднатися" }
+  { icon: "./public/kvitka/stat-lock.png?v=2", title: "Закритий формат", caption: "постійний склад групи" },
+  { icon: "./public/kvitka/stat-group.png?v=2", title: "До 10 учасниць", caption: "камерний склад для довіри" },
+  { icon: "./public/kvitka/stat-calendar.png?v=2", title: "Раз на 2 тижні", caption: "по п'ятницях" },
+  { icon: "./public/kvitka/stat-door.png?v=2", title: "Перші 3 зустрічі", caption: "ще можна приєднатися" }
 ];
 
 const format = [
@@ -89,12 +91,14 @@ function renderList(id, items) {
 }
 
 function renderChips(id, items) {
-  document.querySelector(id).innerHTML = items.map((text) => `<span>${text}</span>`).join("");
+  document.querySelector(id).innerHTML = items
+    .map((item) => `<article><img src="${item.icon}" alt="" loading="lazy" /><p>${item.text}</p></article>`)
+    .join("");
 }
 
 function renderStats(id, items) {
   document.querySelector(id).innerHTML = items
-    .map((s) => `<article><span class="stat-icon">${s.icon}</span><strong>${s.title}</strong><span>${s.caption}</span></article>`)
+    .map((s) => `<article><img class="stat-icon" src="${s.icon}" alt="" loading="lazy" /><strong>${s.title}</strong><span>${s.caption}</span></article>`)
     .join("");
 }
 
@@ -102,6 +106,7 @@ function renderAccordion(id, topics) {
   document.querySelector(id).innerHTML = topics.map((topic, index) => `
     <div class="acc-item" data-acc="${index}">
       <button class="acc-head" data-acc-toggle="${index}">
+        ${topic.icon ? `<img class="acc-icon" src="${topic.icon}" alt="" loading="lazy" />` : ""}
         <span>${topic.title}</span>
         <b>+</b>
       </button>

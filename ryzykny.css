@@ -3,6 +3,44 @@
    Базові токени й компоненти (кольори, кнопки, картки) — у styles.css.
    ============================================================ */
 
+/* ---- іконка-мініатюра в заголовку акордеона ---- */
+#ryz-accordion .acc-head {
+  justify-content: flex-start;
+}
+
+#ryz-accordion .acc-head span {
+  flex: 1;
+}
+
+.acc-icon {
+  display: block;
+  flex: none;
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+}
+
+/* ---- фото настрою (впізнати себе / чому саме група / готова ризикнути) ---- */
+.ryz-mood-photo {
+  margin: 16px 0 18px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  box-shadow: var(--shadow-card);
+}
+
+.ryz-mood-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+.contact-mini .ryz-mood-photo {
+  margin-top: 0;
+}
+
 /* ---- ефект "стосу карток" — рахується в JS через transform, не через CSS sticky
    (нативний sticky в браузері ламається, коли забагато елементів ділять один контейнер) ---- */
 .ryz-stack {
@@ -98,20 +136,34 @@
   }
 }
 
-/* ---- компактні чипси (у групі досліджуємо) ---- */
+/* ---- картки з іконками (у групі досліджуємо) ---- */
 .ryz-chips {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 10px;
 }
 
-.ryz-chips span {
-  display: block;
-  padding: 11px 12px;
+.ryz-chips article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 12px 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--white);
   box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.ryz-chips img {
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+  margin-bottom: 4px;
+}
+
+.ryz-chips p {
+  margin: 0;
   color: var(--ink);
   font-size: 13.5px;
   line-height: 1.35;
@@ -132,23 +184,21 @@
 }
 
 .stat-grid article {
-  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 12px;
   border-radius: var(--radius-md);
   background: var(--white);
   box-shadow: var(--shadow-card);
-  text-align: left;
+  text-align: center;
 }
 
 .stat-grid .stat-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  margin-bottom: 8px;
-  border-radius: 50%;
-  background: var(--sage-tint);
-  font-size: 16px;
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+  margin-bottom: 4px;
 }
 
 .stat-grid strong {
